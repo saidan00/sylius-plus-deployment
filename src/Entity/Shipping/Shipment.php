@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace App\Entity\Shipping;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Table;
 use Sylius\Component\Core\Model\Shipment as BaseShipment;
+use Sylius\Plus\Entity\ShipmentInterface;
+use Sylius\Plus\Entity\ShipmentTrait;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="sylius_shipment")
+ * @Entity
+ * @Table(name="sylius_shipment")
  */
-class Shipment extends BaseShipment
+class Shipment extends BaseShipment implements ShipmentInterface
 {
+    use ShipmentTrait;
 }

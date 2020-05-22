@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+final class Version20180704112314 extends AbstractMigration
+{
+    public function up(Schema $schema): void
+    {
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+        $this->addSql('CREATE TABLE sylius_refund_refund (id INT AUTO_INCREMENT NOT NULL, orderNumber VARCHAR(255) NOT NULL, amount INT NOT NULL, refundedUnitId INT DEFAULT NULL, PRIMARY KEY(id))');
+    }
+
+    public function down(Schema $schema) : void
+    {
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+
+        $this->addSql('DROP TABLE sylius_refund_refund');
+    }
+}
