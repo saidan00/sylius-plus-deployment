@@ -15,12 +15,6 @@ hooks:
         set -e
         yarn install
         GULP_ENV=prod yarn build
-        composer config --global --auth http-basic.sylius.repo.packagist.com token !ENV ${COMPOSER_TOKEN}
-        composer config repositories.plus composer https://sylius.repo.packagist.com/Sylius/
-        composer require sylius/plus --no-update
-        composer config minimum-stability rc
-        composer update --no-scripts
-        composer sync-recipes
     deploy: |
         set -e
         rm -rf var/cache/*
