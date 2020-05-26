@@ -13,7 +13,7 @@ variables:
 hooks:
     build: |
         set -e
-        yarn install
+        yarn install --ignore-engines
         GULP_ENV=prod yarn build
     deploy: |
         set -e
