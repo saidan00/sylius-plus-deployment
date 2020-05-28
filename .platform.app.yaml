@@ -15,13 +15,14 @@ hooks:
         set -e
         yarn install --ignore-engines
         GULP_ENV=prod yarn build
+        wkhtmltopdf -V
     deploy: |
         set -e
         rm -rf var/cache/*
         mkdir -p public/media/image
         bin/console sylius:install --fixture-suite plus -n
-        bin/console assets:install --symlink --relative public
         bin/console sylius:fixtures:load plus -n
+        bin/console assets:install --symlink --relative public
         bin/console cache:clear
 
 # The relationships of the application with services or other applications.
@@ -36,7 +37,9 @@ dependencies:
     nodejs:
         yarn: "*"
         gulp-cli: "*"
-
+    ruby:
+        "wkhtmltopdf-binary": "> 0.12.5.1"
+        
 # The size of the persistent disk of the application (in MB).
 disk: 2048
 
