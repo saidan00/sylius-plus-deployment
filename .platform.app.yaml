@@ -19,9 +19,9 @@ hooks:
         set -e
         rm -rf var/cache/*
         mkdir -p public/media/image
-        bin/console sylius:install -n
-        bin/console sylius:fixtures:load -n
+        bin/console sylius:install --fixture-suite plus -n
         bin/console assets:install --symlink --relative public
+        bin/console sylius:fixtures:load plus -n
         bin/console cache:clear
 
 # The relationships of the application with services or other applications.
